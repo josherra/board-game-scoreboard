@@ -1,0 +1,72 @@
+#root {
+  height: 100%;
+}
+
+body,
+html {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  background: none;
+  border: 1px solid #47b6e2;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.game-start {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.game-start input {
+  margin-bottom: 1rem;
+  width: 20rem;
+  padding: 0.5rem;
+}
+
+.game-start button {
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.table {
+  max-width: 1200px;
+  width: 100%;
+  margin: 1rem auto;
+}
+
+table,
+th,
+td {
+  text-align: left;
+  border: 0.2px solid;
+  padding: 0.5rem;
+}
+
+th {
+  background: rgb(85, 37, 37);
+}
+
+.person-score {
+  border: 2px solid red;
+  padding: 1rem;
+}
