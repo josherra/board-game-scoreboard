@@ -9,21 +9,21 @@ function App() {
   const [data, setData] = useState({
     rounds: "",
     players: "",
-    playerNames: ["XX", "XY", "ZZZ", "YZZ"],
+    playerNames: [],
   });
 
   const onNewGame = () => {
     setData({
       rounds: "",
       players: "",
-      playerNames: ["XX", "XY", "ZZZ", "YZZ"],
+      playerNames: [],
     });
     setOpenGame(false);
     setNewGame(!newGame);
   };
 
   return (
-    <>
+    <div className="container">
       <header className="header">
         <h1>Up the River / Down the River</h1>
       </header>
@@ -42,7 +42,7 @@ function App() {
         />
       )}
       {openGame && <GameTable data={data} />}
-    </>
+    </div>
   );
 }
 

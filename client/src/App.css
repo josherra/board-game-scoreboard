@@ -9,14 +9,17 @@ html {
   padding: 0;
 }
 
-.header {
-  padding: 1rem;
+.container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.header {
+  padding: 1rem;
+  margin: 0 auto;
+}
+
 .main {
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -27,10 +30,14 @@ html {
   cursor: pointer;
   font-size: 18px;
   border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.btn-cyan {
+  border: 1px solid cyan;
 }
 
 .game-start {
-  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -49,7 +56,6 @@ html {
 }
 
 .table {
-  max-width: 1200px;
   width: 100%;
   margin: 1rem auto;
 }

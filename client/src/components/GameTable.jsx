@@ -3,16 +3,18 @@ import React, { useEffect, useState } from "react";
 export const GameTable = ({ data }) => {
   const [gameData, setGameData] = useState([]);
   const [gameRounds, setGameRounds] = useState([]);
+  const [hideScorecard, setHideScorecard] = useState(true);
 
   /**
-   * Generate the structure for the rounds.
-   * @param {*} rounds
+   * Create the game info for each player.
+   * @param {*} data
    * @returns {Array}
    */
-  const generateRounds = (rounds) => {
+  const createGameInfo = async (data) => {
+    let tempGameData = [];
     let roundsArray = [];
 
-    for (let i = 1; i <= rounds; i++) {
+    for (let i = 1; i <= data.rounds; i++) {
       roundsArray.push(i);
     }
 
@@ -23,16 +25,6 @@ export const GameTable = ({ data }) => {
     roundsArray = [...roundsArray, ...copy];
 
     setGameRounds([...roundsArray]);
-    return roundsArray;
-  };
-
-  /**
-   * Create the game info for each player.
-   * @param {*} data
-   * @returns {Array}
-   */
-  const createGameInfo = (data, rounds) => {
-    let tempGameData = [];
 
     data.playerNames.forEach((name) => {
       let object = {
@@ -40,27 +32,51 @@ export const GameTable = ({ data }) => {
         rounds: [],
       };
 
-      rounds.forEach((round) => {
+      roundsArray.forEach((round) => {
         object.rounds.push({ round: round, bet: null, score: 0 });
       });
 
       tempGameData.push(object);
     });
 
-    return tempGameData;
+    setGameData(tempGameData);
   };
 
   useEffect(() => {
-    generateRounds(data.rounds);
-    let response = createGameInfo(data, gameRounds);
-    setGameData(response);
+    createGameInfo(data);
   }, []);
 
   return (
-    <div className="table">
-      {gameRounds.map((round) => (
-        <p>{round}</p>
-      ))}
-    </div>
+    <>
+      <button
+        className="btn btn-cyan"
+        onClick={() => setHideScorecard(!hideScorecard)}
+      >
+        {hideScorecard ? "Show" : "Hide"} Scorecard
+      </button>
+      {!hideScorecard && (
+        <table className="table">
+          <thead>
+            <tr>
+              <td>Round</td>
+              {data.playerNames.map((person) => (
+                <td style={{ background: "green" }}>{person}</td>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {gameData &&
+              gameRounds.map((round, roundIndex) => (
+                <tr key={roundIndex}>
+                  <td>{round}</td>
+                  {gameData.map((person, index) => (
+                    <td>{gameData[index].rounds[roundIndex].bet}</td>
+                  ))}
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
+    </>
   );
 };
