@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { GameTable } from "./components/GameTable";
 import { GameStart } from "./components/GameStart";
+import { RoundInfo } from "./components/RoundInfo";
 
 function App() {
   const [newGame, setNewGame] = useState(false);
@@ -10,7 +11,10 @@ function App() {
     rounds: "",
     players: "",
     playerNames: [],
+    scores: [],
   });
+  const [gameRounds, setGameRounds] = useState([]);
+  const [currentRound, setCurrentRound] = useState(null);
 
   const onNewGame = () => {
     setData({
@@ -41,7 +45,24 @@ function App() {
           setOpenGame={setOpenGame}
         />
       )}
-      {openGame && <GameTable data={data} />}
+      {openGame && (
+        <GameTable
+          gameRounds={gameRounds}
+          setGameRounds={setGameRounds}
+          data={data}
+          setData={setData}
+          setCurrentRound={setCurrentRound}
+        />
+      )}
+      {data.scores && data.scores.length > 0 && (
+        <RoundInfo
+          currentRound={currentRound}
+          scores={data.scores}
+          setData={setData}
+          data={data}
+          setCurrentRound={setCurrentRound}
+        />
+      )}
     </div>
   );
 }

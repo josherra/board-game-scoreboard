@@ -34,7 +34,7 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
 
   return (
     <form className="game-start" onSubmit={handleSubmit}>
-      <label htmlFor="rounds">How many cards are we going up to?</label>
+      <label htmlFor="rounds">How many tricks are we going up to?</label>
       <input
         onChange={handleChange}
         value={data.rounds}

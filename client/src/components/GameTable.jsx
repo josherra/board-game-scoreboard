@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-export const GameTable = ({ data }) => {
+export const GameTable = ({
+  data,
+  setData,
+  gameRounds,
+  setGameRounds,
+  setCurrentRound,
+}) => {
   const [gameData, setGameData] = useState([]);
-  const [gameRounds, setGameRounds] = useState([]);
   const [hideScorecard, setHideScorecard] = useState(true);
 
   /**
@@ -33,13 +38,14 @@ export const GameTable = ({ data }) => {
       };
 
       roundsArray.forEach((round) => {
-        object.rounds.push({ round: round, bet: null, score: 0 });
+        object.rounds.push({ round: round, bet: 0, score: 0 });
       });
 
       tempGameData.push(object);
     });
 
-    setGameData(tempGameData);
+    setData({ ...data, scores: tempGameData });
+    setCurrentRound(0);
   };
 
   useEffect(() => {
@@ -65,12 +71,12 @@ export const GameTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {gameData &&
+            {data.scores &&
               gameRounds.map((round, roundIndex) => (
                 <tr key={roundIndex}>
                   <td>{round}</td>
-                  {gameData.map((person, index) => (
-                    <td>{gameData[index].rounds[roundIndex].bet}</td>
+                  {data.scores.map((person, index) => (
+                    <td>{data.scores[index].rounds[roundIndex].bet}</td>
                   ))}
                 </tr>
               ))}
