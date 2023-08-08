@@ -61,6 +61,7 @@ function App() {
           setData={setData}
           data={data}
           setCurrentRound={setCurrentRound}
+          gameRounds={gameRounds}
         />
       )}
     </div>

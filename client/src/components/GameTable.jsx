@@ -7,7 +7,6 @@ export const GameTable = ({
   setGameRounds,
   setCurrentRound,
 }) => {
-  const [gameData, setGameData] = useState([]);
   const [hideScorecard, setHideScorecard] = useState(true);
 
   /**
@@ -38,7 +37,7 @@ export const GameTable = ({
       };
 
       roundsArray.forEach((round) => {
-        object.rounds.push({ round: round, bet: 0, score: 0 });
+        object.rounds.push({ round: round, bet: 0, score: 0, madeBet: null });
       });
 
       tempGameData.push(object);
