@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const GameTable = ({
-  data,
-  setData,
-  gameRounds,
-  setGameRounds,
-  setCurrentRound,
-}) => {
+export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrentRound }) => {
   const [hideScorecard, setHideScorecard] = useState(true);
 
   /**
@@ -34,6 +28,7 @@ export const GameTable = ({
       let object = {
         name: name,
         rounds: [],
+        total: 0,
       };
 
       roundsArray.forEach((round) => {
@@ -53,10 +48,7 @@ export const GameTable = ({
 
   return (
     <>
-      <button
-        className="btn btn-cyan"
-        onClick={() => setHideScorecard(!hideScorecard)}
-      >
+      <button className="btn btn-cyan" onClick={() => setHideScorecard(!hideScorecard)}>
         {hideScorecard ? "Show" : "Hide"} Scorecard
       </button>
       {!hideScorecard && (
@@ -65,7 +57,9 @@ export const GameTable = ({
             <tr>
               <td>Round</td>
               {data.playerNames.map((person) => (
-                <td style={{ background: "green" }}>{person}</td>
+                <td style={{ textAlign: "center" }} colSpan={2}>
+                  {person}
+                </td>
               ))}
             </tr>
           </thead>
@@ -75,7 +69,10 @@ export const GameTable = ({
                 <tr key={roundIndex}>
                   <td>{round}</td>
                   {data.scores.map((person, index) => (
-                    <td>{data.scores[index].rounds[roundIndex].bet}</td>
+                    <>
+                      <td>{data.scores[index].rounds[roundIndex].bet}</td>
+                      <td>{data.scores[index].total}</td>
+                    </>
                   ))}
                 </tr>
               ))}
