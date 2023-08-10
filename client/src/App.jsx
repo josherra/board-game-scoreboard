@@ -27,24 +27,17 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <header className="header">
+    <div className="container mx-auto border-red-600">
+      <header className="prose lg:prose-xl max-w-none">
         <h1>Up the River / Down the River</h1>
       </header>
-      <main className="main">
+      <main className="prose">
         <h3>Welcome back, **USER**</h3>
         <button onClick={onNewGame} className="btn">
           Start a new game
         </button>
       </main>
-      {newGame && (
-        <GameStart
-          data={data}
-          setData={setData}
-          setNewGame={setNewGame}
-          setOpenGame={setOpenGame}
-        />
-      )}
+      {newGame && <GameStart data={data} setData={setData} setNewGame={setNewGame} setOpenGame={setOpenGame} />}
       {openGame && (
         <GameTable
           gameRounds={gameRounds}
