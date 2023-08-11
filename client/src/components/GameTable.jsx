@@ -47,19 +47,19 @@ export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrent
   }, []);
 
   return (
-    <>
-      <button className="btn btn-cyan" onClick={() => setHideScorecard(!hideScorecard)}>
-        {hideScorecard ? "Show" : "Hide"} Scorecard
-      </button>
+    <div className="border-2 overflow-x-auto">
+      <div className="flex">
+        <button className="btn" onClick={() => setHideScorecard(!hideScorecard)}>
+          {hideScorecard ? "Show" : "Hide"} Scorecard
+        </button>
+      </div>
       {!hideScorecard && (
-        <table className="table">
+        <table className="table table-zebra md:table-md sm:table-xs">
           <thead>
             <tr>
               <td>Round</td>
               {data.playerNames.map((person) => (
-                <td style={{ textAlign: "center" }} colSpan={2}>
-                  {person}
-                </td>
+                <td>{person}</td>
               ))}
             </tr>
           </thead>
@@ -70,8 +70,9 @@ export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrent
                   <td>{round}</td>
                   {data.scores.map((person, index) => (
                     <>
-                      <td>{data.scores[index].rounds[roundIndex].bet}</td>
-                      <td>{data.scores[index].total}</td>
+                      <td>
+                        {data.scores[index].rounds[roundIndex].bet} // {data.scores[index].total}
+                      </td>
                     </>
                   ))}
                 </tr>
@@ -79,6 +80,6 @@ export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrent
           </tbody>
         </table>
       )}
-    </>
+    </div>
   );
 };

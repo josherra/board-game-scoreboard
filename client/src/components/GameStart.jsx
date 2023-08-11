@@ -33,9 +33,10 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
   };
 
   return (
-    <form className="game-start" onSubmit={handleSubmit}>
+    <form className="p-4 flex flex-col" onSubmit={handleSubmit}>
       <label htmlFor="rounds">How many tricks are we going up to?</label>
       <input
+        className="input input-bordered input-m max-w-xs rounded my-4"
         onChange={handleChange}
         value={data.rounds}
         id="rounds"
@@ -44,6 +45,7 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
       />
       <label htmlFor="players">How many players?</label>
       <input
+        className="input input-bordered input-m max-w-xs rounded my-4"
         onChange={onChangePlayerCount}
         value={data.players}
         id="players"
@@ -55,11 +57,10 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
       {/* TODO: Clean this up */}
       {players &&
         players.map((player) => (
-          <div key={player} style={{ display: "flex" }}>
-            <label htmlFor={`player${player}`} style={{ marginRight: "1rem" }}>
-              Player {player + 1}
-            </label>
+          <div key={player}>
+            <label htmlFor={`player${player}`}>Player {player + 1}</label>
             <input
+              className="input input-bordered input-sm max-w-xs rounded my-4 mx-2"
               onChange={addPlayers}
               name={`player${player}`}
               id={`player${player}`}
@@ -67,7 +68,9 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
             />
           </div>
         ))}
-      <button type="submit">Start</button>
+      <button className="btn w-52" type="submit">
+        Start
+      </button>
     </form>
   );
 };

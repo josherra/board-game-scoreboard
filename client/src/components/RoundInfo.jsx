@@ -32,47 +32,39 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
   };
 
   return (
-    <div className="round-box">
-      <p>Round #{currentRound + 1}</p>
+    <div className="flex flex-col mt-4">
+      <h1 className="text-3xl text-center">Round #{currentRound + 1}</h1>
       <p># of tricks available {gameRounds[Number(currentRound)]}</p>
       {scores.map((person, index) => (
-        <div
-          style={{
-            display: "flex",
-            margin: "1rem",
-            opacity: `${person.rounds[currentRound].madeBet === false ? "40%" : ""}`,
-          }}
-        >
-          <p
-            style={{
-              marginRight: "1rem",
-            }}
-          >
-            {person.name}
-          </p>
+        <div className="flex border-2 p-4">
+          <p>{person.name}</p>
 
-          <button
-            disabled={person.rounds[currentRound].bet === 0}
-            onClick={() => changeBet(index, "decrease")}
-            className="btn-small"
-          >
+          <button disabled={person.rounds[currentRound].bet === 0} onClick={() => changeBet(index, "decrease")}>
             -
           </button>
           <p>{person.rounds[currentRound].bet}</p>
-          <button onClick={() => changeBet(index, "increase")} className="btn-small">
-            +
-          </button>
+          <button onClick={() => changeBet(index, "increase")}>+</button>
           <button onClick={() => betAction("made", index)}>Made bet</button>
           <button onClick={() => betAction("not made", index)}>Did not make bet</button>
         </div>
       ))}
-      <button onClick={() => setCurrentRound(currentRound - 1)} disabled={currentRound === 0}>
-        Prev Round
-      </button>
-      {/* TODO: Fix the calculation for game rounds */}
-      <button disabled={currentRound + 1 === data.rounds * 2 - 1} onClick={() => setCurrentRound(currentRound + 1)}>
-        Next Round
-      </button>
+      <div>
+        <button
+          className="btn btn-sm btn-neutral my-4"
+          onClick={() => setCurrentRound(currentRound - 1)}
+          disabled={currentRound === 0}
+        >
+          Prev Round
+        </button>
+        {/* TODO: Fix the calculation for game rounds */}
+        <button
+          className="btn btn-sm btn-neutral my-4"
+          disabled={currentRound + 1 === data.rounds * 2 - 1}
+          onClick={() => setCurrentRound(currentRound + 1)}
+        >
+          Next Round
+        </button>
+      </div>
     </div>
   );
 };
