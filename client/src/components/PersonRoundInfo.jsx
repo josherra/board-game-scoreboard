@@ -1,14 +1,17 @@
 import React from "react";
 
 export const PersonRoundInfo = ({ person, currentRound, changeBet, betAction, index }) => {
+  console.log(person);
+  console.log(currentRound);
+
   return (
     <div
-      className={`card p-4 w-[200px] justify-center items-center gap-4 shadow-md shadow-slate-700 ${
+      className={`card p-4 w-[200px] justify-center items-center gap-4 shadow-md ${
         person.rounds[currentRound].madeBet === false
           ? "shadow-red-400"
           : person.rounds[currentRound].madeBet === true
           ? "shadow-green-400"
-          : ""
+          : "shadow-slate-700"
       }`}
     >
       <p className="card-title">{person.name}</p>

@@ -32,17 +32,10 @@ function App() {
       <header className="text-center prose lg:prose-xl max-w-none">
         <h1>Up the River / Down the River</h1>
       </header>
-      <main className="p-4">
-        <div className="flex justify-center">
-          <button className="btn" onClick={onNewGame}>
-            Start a new game
-          </button>
-          {openGame && (
-            <button className="btn" onClick={() => setHideScorecard(!hideScorecard)}>
-              {hideScorecard ? "Show" : "Hide"} Scorecard
-            </button>
-          )}
-        </div>
+      <main className="p-4 flex flex-col items-center">
+        <button className="btn mt-8 w-[300px]" onClick={onNewGame}>
+          Start a new game
+        </button>
         {newGame && <GameStart data={data} setData={setData} setNewGame={setNewGame} setOpenGame={setOpenGame} />}
         {data.scores && data.scores.length > 0 && (
           <RoundInfo
@@ -55,15 +48,20 @@ function App() {
           />
         )}
         {openGame && (
-          <GameTable
-            currentRound={currentRound}
-            gameRounds={gameRounds}
-            setGameRounds={setGameRounds}
-            data={data}
-            setData={setData}
-            setCurrentRound={setCurrentRound}
-            hideScorecard={hideScorecard}
-          />
+          <>
+            <button className="btn" onClick={() => setHideScorecard(!hideScorecard)}>
+              {hideScorecard ? "Show" : "Hide"} Scorecard
+            </button>
+            <GameTable
+              currentRound={currentRound}
+              gameRounds={gameRounds}
+              setGameRounds={setGameRounds}
+              data={data}
+              setData={setData}
+              setCurrentRound={setCurrentRound}
+              hideScorecard={hideScorecard}
+            />
+          </>
         )}
       </main>
     </div>

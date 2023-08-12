@@ -33,7 +33,7 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
   };
 
   return (
-    <form className="p-4 flex flex-col" onSubmit={handleSubmit}>
+    <form className="mt-4 p-4 flex flex-col max-w-lg w-full self-start" onSubmit={handleSubmit}>
       <label htmlFor="rounds">How many tricks are we going up to?</label>
       <input
         className="input input-bordered input-m max-w-xs rounded my-4"
