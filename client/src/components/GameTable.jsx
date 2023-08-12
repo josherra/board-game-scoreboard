@@ -54,9 +54,9 @@ export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrent
         </button>
       </div>
       {!hideScorecard && (
-        <table className="table table-zebra md:table-md sm:table-xs">
+        <table className="table-zebra md:table-md sm:table-xs table-xs w-full text-left">
           <thead>
-            <tr>
+            <tr className="text-sm text-left">
               <td>Round</td>
               {data.playerNames.map((person) => (
                 <td>{person}</td>
@@ -71,7 +71,7 @@ export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrent
                   {data.scores.map((person, index) => (
                     <>
                       <td>
-                        {data.scores[index].rounds[roundIndex].bet} // {data.scores[index].total}
+                        {data.scores[index].rounds[roundIndex].bet} | {data.scores[index].total}
                       </td>
                     </>
                   ))}

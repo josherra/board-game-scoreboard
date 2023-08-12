@@ -1,4 +1,5 @@
 import React from "react";
+import { PersonRoundInfo } from "./PersonRoundInfo";
 
 export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data, gameRounds }) => {
   const changeBet = (index, type) => {
@@ -36,17 +37,13 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
       <h1 className="text-3xl text-center">Round #{currentRound + 1}</h1>
       <p># of tricks available {gameRounds[Number(currentRound)]}</p>
       {scores.map((person, index) => (
-        <div className="flex border-2 p-4">
-          <p>{person.name}</p>
-
-          <button disabled={person.rounds[currentRound].bet === 0} onClick={() => changeBet(index, "decrease")}>
-            -
-          </button>
-          <p>{person.rounds[currentRound].bet}</p>
-          <button onClick={() => changeBet(index, "increase")}>+</button>
-          <button onClick={() => betAction("made", index)}>Made bet</button>
-          <button onClick={() => betAction("not made", index)}>Did not make bet</button>
-        </div>
+        <PersonRoundInfo
+          person={person}
+          currentRound={currentRound}
+          changeBet={changeBet}
+          betAction={betAction}
+          index={index}
+        />
       ))}
       <div>
         <button
