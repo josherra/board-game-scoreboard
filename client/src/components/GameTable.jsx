@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrentRound }) => {
-  const [hideScorecard, setHideScorecard] = useState(true);
-
+export const GameTable = ({
+  data,
+  setData,
+  gameRounds,
+  setGameRounds,
+  setCurrentRound,
+  hideScorecard,
+  currentRound,
+}) => {
   /**
    * Create the game info for each player.
    * @param {*} data
@@ -42,21 +48,18 @@ export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrent
     setCurrentRound(0);
   };
 
+  const filteredRounds = gameRounds.slice(0, currentRound + 1);
+
   useEffect(() => {
     createGameInfo(data);
   }, []);
 
   return (
-    <div className="border-2 overflow-x-auto">
-      <div className="flex">
-        <button className="btn" onClick={() => setHideScorecard(!hideScorecard)}>
-          {hideScorecard ? "Show" : "Hide"} Scorecard
-        </button>
-      </div>
+    <div className="mt-4 overflow-x-auto">
       {!hideScorecard && (
-        <table className="table-zebra md:table-md sm:table-xs table-xs w-full text-left">
+        <table className="table-zebra md:table-md sm:table-xs table-xs w-full">
           <thead>
-            <tr className="text-sm text-left">
+            <tr className="sm:text-sm text-left">
               <td>Round</td>
               {data.playerNames.map((person) => (
                 <td>{person}</td>
@@ -65,7 +68,7 @@ export const GameTable = ({ data, setData, gameRounds, setGameRounds, setCurrent
           </thead>
           <tbody>
             {data.scores &&
-              gameRounds.map((round, roundIndex) => (
+              filteredRounds.map((round, roundIndex) => (
                 <tr key={roundIndex}>
                   <td>{round}</td>
                   {data.scores.map((person, index) => (

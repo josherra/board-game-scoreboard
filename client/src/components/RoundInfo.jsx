@@ -25,6 +25,7 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
       copy[index].rounds[currentRound] = round;
       setData({ ...data, scores: copy });
     } else {
+      copy[index].total -= round.score;
       round.score = 0;
       round.madeBet = false;
       copy[index].rounds[currentRound] = round;
@@ -33,18 +34,20 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
   };
 
   return (
-    <div className="flex flex-col mt-4">
+    <div className="flex flex-col mt-4 items-center">
       <h1 className="text-3xl text-center">Round #{currentRound + 1}</h1>
       <p># of tricks available {gameRounds[Number(currentRound)]}</p>
-      {scores.map((person, index) => (
-        <PersonRoundInfo
-          person={person}
-          currentRound={currentRound}
-          changeBet={changeBet}
-          betAction={betAction}
-          index={index}
-        />
-      ))}
+      <div className="flex justify-center flex-wrap gap-4 my-4">
+        {scores.map((person, index) => (
+          <PersonRoundInfo
+            person={person}
+            currentRound={currentRound}
+            changeBet={changeBet}
+            betAction={betAction}
+            index={index}
+          />
+        ))}
+      </div>
       <div>
         <button
           className="btn btn-sm btn-neutral my-4"

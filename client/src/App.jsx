@@ -15,6 +15,7 @@ function App() {
   });
   const [gameRounds, setGameRounds] = useState([]);
   const [currentRound, setCurrentRound] = useState(null);
+  const [hideScorecard, setHideScorecard] = useState(true);
 
   const onNewGame = () => {
     setData({
@@ -30,22 +31,19 @@ function App() {
     <div className="container mx-auto border-red-600 p-4">
       <header className="text-center prose lg:prose-xl max-w-none">
         <h1>Up the River / Down the River</h1>
-        <h3>Welcome back, **USER**</h3>
       </header>
       <main className="p-4">
-        <button onClick={onNewGame} className="btn mx-auto">
-          Start a new game
-        </button>
+        <div className="flex justify-center">
+          <button className="btn" onClick={onNewGame}>
+            Start a new game
+          </button>
+          {openGame && (
+            <button className="btn" onClick={() => setHideScorecard(!hideScorecard)}>
+              {hideScorecard ? "Show" : "Hide"} Scorecard
+            </button>
+          )}
+        </div>
         {newGame && <GameStart data={data} setData={setData} setNewGame={setNewGame} setOpenGame={setOpenGame} />}
-        {openGame && (
-          <GameTable
-            gameRounds={gameRounds}
-            setGameRounds={setGameRounds}
-            data={data}
-            setData={setData}
-            setCurrentRound={setCurrentRound}
-          />
-        )}
         {data.scores && data.scores.length > 0 && (
           <RoundInfo
             currentRound={currentRound}
@@ -54,6 +52,17 @@ function App() {
             data={data}
             setCurrentRound={setCurrentRound}
             gameRounds={gameRounds}
+          />
+        )}
+        {openGame && (
+          <GameTable
+            currentRound={currentRound}
+            gameRounds={gameRounds}
+            setGameRounds={setGameRounds}
+            data={data}
+            setData={setData}
+            setCurrentRound={setCurrentRound}
+            hideScorecard={hideScorecard}
           />
         )}
       </main>
