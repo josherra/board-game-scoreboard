@@ -62,7 +62,7 @@ export const GameTable = ({
             <tr className="sm:text-sm text-left">
               <td>Round</td>
               {data.playerNames.map((person) => (
-                <td>{person}</td>
+                <td key={person}>{person}</td>
               ))}
             </tr>
           </thead>
@@ -81,7 +81,7 @@ export const GameTable = ({
                         >
                           {data.scores[index].rounds[roundIndex].bet}
                         </span>{" "}
-                        | {data.scores[index].total}
+                        | {data.scores[index].rounds[roundIndex].score}
                       </td>
                     </>
                   ))}

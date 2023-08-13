@@ -17,16 +17,17 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
   const betAction = (event, index) => {
     let copy = [...data.scores];
     let round = copy[index].rounds[currentRound];
+    let previousRound = copy[index].rounds[currentRound - 1];
 
     if (event == "made") {
       round.score = round.bet ** 2 + 10;
       round.madeBet = true;
-      copy[index].total += round.score;
+      previousRound ? (round.score += previousRound.score) : +0;
       copy[index].rounds[currentRound] = round;
       setData({ ...data, scores: copy });
     } else {
-      copy[index].total -= round.score;
       round.score = 0;
+      previousRound ? (round.score += previousRound.score) : +0;
       round.madeBet = false;
       copy[index].rounds[currentRound] = round;
       setData({ ...data, scores: copy });
@@ -35,8 +36,7 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
 
   return (
     <div className="flex flex-col mt-4 items-center">
-      <h1 className="text-3xl text-center">Round #{currentRound + 1}</h1>
-      <p># of tricks available {gameRounds[Number(currentRound)]}</p>
+      <h1 className="text-3xl text-center">Round #{gameRounds[Number(currentRound)]}</h1>
       <div className="flex justify-center flex-wrap gap-4 my-4">
         {scores.map((person, index) => (
           <PersonRoundInfo

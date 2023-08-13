@@ -1,9 +1,6 @@
 import React from "react";
 
 export const PersonRoundInfo = ({ person, currentRound, changeBet, betAction, index }) => {
-  console.log(person);
-  console.log(currentRound);
-
   return (
     <div
       className={`card p-4 w-[200px] justify-center items-center gap-4 shadow-md ${
@@ -33,10 +30,18 @@ export const PersonRoundInfo = ({ person, currentRound, changeBet, betAction, in
         </button>
       </div>
       <div className="flex flex-col gap-2">
-        <button className="btn-sm btn btn-primary" onClick={() => betAction("made", index)}>
+        <button
+          disabled={person.rounds[currentRound].madeBet === true}
+          className="btn-sm btn btn-primary"
+          onClick={() => betAction("made", index)}
+        >
           Made bet
         </button>
-        <button className="btn-sm btn btn-error" onClick={() => betAction("not made", index)}>
+        <button
+          disabled={person.rounds[currentRound].madeBet === false}
+          className="btn-sm btn btn-error"
+          onClick={() => betAction("not made", index)}
+        >
           Did not make bet
         </button>
       </div>
