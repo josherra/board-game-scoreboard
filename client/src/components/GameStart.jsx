@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
+export const GameStart = ({ createGameInfo, data, setData, setNewGame, setOpenGame }) => {
   const [players, setPlayers] = useState([]);
   const [playerNames, setPlayerNames] = useState({});
 
@@ -29,7 +29,7 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
       namesArray.push(name);
     });
 
-    setData({ ...data, playerNames: namesArray });
+    createGameInfo(data, namesArray);
   };
 
   return (
