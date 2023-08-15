@@ -2,7 +2,6 @@ import React from "react";
 
 export const GameTable = ({ data, hideScorecard, currentRound }) => {
   const filteredRounds = data.gameRounds.slice(0, currentRound + 1);
-  console.log(`Filtered rounds: ${filteredRounds}`);
 
   return (
     <div className="mt-4 overflow-x-auto">

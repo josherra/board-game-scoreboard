@@ -36,7 +36,7 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
 
   return (
     <div className="flex flex-col mt-4 items-center">
-      <h1 className="text-3xl text-center">Round #{data.gameRounds[Number(currentRound)]}</h1>
+      <h1 className="md:text-3xl sm:text-xl text-center">Round #{data.gameRounds[Number(currentRound)]}</h1>
       <div className="flex justify-center flex-wrap gap-4 my-4">
         {scores.map((person, index) => (
           <PersonRoundInfo

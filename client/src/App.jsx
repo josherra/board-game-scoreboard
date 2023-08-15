@@ -23,10 +23,9 @@ function App() {
 
   useEffect(() => {
     const foundData = JSON.parse(localStorage.getItem("data"));
-    if (foundData) {
+    if (Number(foundData.rounds) > 0) {
       setData(foundData);
       setOpenGame(true);
-      console.log("setting current round...");
     }
   }, []);
 
@@ -74,8 +73,8 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto border-red-600 p-4">
-      <header className="text-center prose lg:prose-xl max-w-none">
+    <div className="md:container mx-auto border-red-600 p-4">
+      <header className="text-center prose lg:prose-xl sm:prose-h1 max-w-none">
         <h1>Up the River / Down the River</h1>
       </header>
       <main className="p-4 flex flex-col items-center">

@@ -3,7 +3,7 @@ import React from "react";
 export const PersonRoundInfo = ({ person, currentRound, changeBet, betAction, index }) => {
   return (
     <div
-      className={`card p-4 w-[200px] justify-center items-center gap-4 shadow-md ${
+      className={`card p-4 justify-center items-center gap-4 shadow-md md:text-base sm:text-sm ${
         person.rounds[currentRound].madeBet === false
           ? "shadow-red-400"
           : person.rounds[currentRound].madeBet === true
@@ -11,7 +11,7 @@ export const PersonRoundInfo = ({ person, currentRound, changeBet, betAction, in
           : "shadow-slate-700"
       }`}
     >
-      <p className="card-title">{person.name}</p>
+      <p className="md:card-title">{person.name}</p>
       <div className="flex justify-between gap-4">
         <button
           className="btn-sm btn-circle bg-gray-400 text-black disabled:bg-gray-700"
