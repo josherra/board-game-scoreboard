@@ -13,17 +13,15 @@ function App() {
   const [hideScorecard, setHideScorecard] = useState(true);
 
   const onNewGame = () => {
-    setData({
-      rounds: "",
-      players: "",
-    });
+    localStorage.removeItem("data");
+    setData({});
     setOpenGame(false);
     setNewGame(!newGame);
   };
 
   useEffect(() => {
     const foundData = JSON.parse(localStorage.getItem("data"));
-    if (Number(foundData.rounds) > 0) {
+    if (foundData) {
       setData(foundData);
       setOpenGame(true);
     }
