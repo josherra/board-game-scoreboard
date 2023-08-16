@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 
-export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
+export const GameStart = ({ createGameInfo, setNewGame, setOpenGame }) => {
   const [players, setPlayers] = useState([]);
   const [playerNames, setPlayerNames] = useState({});
+  const [localData, setLocalData] = useState({ rounds: "", players: "" });
 
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: Number(e.target.value) });
+    setLocalData({ ...localData, [e.target.name]: Number(e.target.value) });
   };
 
   const onChangePlayerCount = (e) => {
-    setData({ ...data, players: Number(e.target.value) });
+    setLocalData({ ...localData, players: Number(e.target.value) });
     const newArray = Array.from(Array(Number(e.target.value)).keys());
     setPlayers(newArray);
   };
@@ -29,23 +30,25 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
       namesArray.push(name);
     });
 
-    setData({ ...data, playerNames: namesArray });
+    createGameInfo(localData, namesArray);
   };
 
   return (
-    <form className="game-start" onSubmit={handleSubmit}>
+    <form className="mt-4 p-4 flex flex-col max-w-lg w-full self-start" onSubmit={handleSubmit}>
       <label htmlFor="rounds">How many tricks are we going up to?</label>
       <input
+        className="input input-bordered input-m max-w-xs rounded my-4"
         onChange={handleChange}
-        value={data.rounds}
+        value={localData.rounds}
         id="rounds"
         name="rounds"
         type="number"
       />
       <label htmlFor="players">How many players?</label>
       <input
+        className="input input-bordered input-m max-w-xs rounded my-4"
         onChange={onChangePlayerCount}
-        value={data.players}
+        value={localData.players}
         id="players"
         name="players"
         type="number"
@@ -55,11 +58,10 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
       {/* TODO: Clean this up */}
       {players &&
         players.map((player) => (
-          <div key={player} style={{ display: "flex" }}>
-            <label htmlFor={`player${player}`} style={{ marginRight: "1rem" }}>
-              Player {player + 1}
-            </label>
+          <div key={player}>
+            <label htmlFor={`player${player}`}>Player {player + 1}</label>
             <input
+              className="input input-bordered input-sm max-w-xs rounded my-4 mx-2"
               onChange={addPlayers}
               name={`player${player}`}
               id={`player${player}`}
@@ -67,7 +69,9 @@ export const GameStart = ({ data, setData, setNewGame, setOpenGame }) => {
             />
           </div>
         ))}
-      <button type="submit">Start</button>
+      <button className="btn w-52" type="submit">
+        Start
+      </button>
     </form>
   );
 };
