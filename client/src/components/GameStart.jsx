@@ -44,7 +44,7 @@ export const GameStart = ({ createGameInfo, setNewGame, setOpenGame }) => {
         name="rounds"
         type="number"
         min={1}
-        max={localData.players ? Math.floor(52 / localData.players) : 13}
+        max={localData.players ? Math.floor(52 / localData.players) : 26}
       />
       <label htmlFor="players">How many players?</label>
       <input
