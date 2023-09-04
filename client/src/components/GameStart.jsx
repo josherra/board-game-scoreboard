@@ -10,7 +10,7 @@ export const GameStart = ({ createGameInfo, setNewGame, setOpenGame }) => {
   };
 
   const onChangePlayerCount = (e) => {
-    setLocalData({ ...localData, players: Number(e.target.value) });
+    setLocalData({ ...localData, players: Number(e.target.value), rounds: "" });
     const newArray = Array.from(Array(Number(e.target.value)).keys());
     setPlayers(newArray);
   };
@@ -35,17 +35,6 @@ export const GameStart = ({ createGameInfo, setNewGame, setOpenGame }) => {
 
   return (
     <form className="mt-4 p-4 flex flex-col max-w-lg w-full self-start" onSubmit={handleSubmit}>
-      <label htmlFor="rounds">How many tricks are we going up to?</label>
-      <input
-        className="input input-bordered input-m max-w-xs rounded my-4"
-        onChange={handleChange}
-        value={localData.rounds}
-        id="rounds"
-        name="rounds"
-        type="number"
-        min={1}
-        max={localData.players ? Math.floor(52 / localData.players) : 26}
-      />
       <label htmlFor="players">How many players?</label>
       <input
         className="input input-bordered input-m max-w-xs rounded my-4"
@@ -56,6 +45,17 @@ export const GameStart = ({ createGameInfo, setNewGame, setOpenGame }) => {
         type="number"
         min={1}
         max={26}
+      />
+      <label htmlFor="rounds">How many tricks are we going up to?</label>
+      <input
+        className="input input-bordered input-m max-w-xs rounded my-4"
+        onChange={handleChange}
+        value={localData.rounds}
+        id="rounds"
+        name="rounds"
+        type="number"
+        min={1}
+        max={localData.players ? Math.floor(52 / localData.players) : 26}
       />
       {/* TODO: Clean this up */}
       {players &&
