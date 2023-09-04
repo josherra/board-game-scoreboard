@@ -53,7 +53,7 @@ export const GameStart = ({ createGameInfo, setNewGame, setOpenGame }) => {
         name="players"
         type="number"
         min={1}
-        max={4}
+        max={5}
       />
       {/* TODO: Clean this up */}
       {players &&
