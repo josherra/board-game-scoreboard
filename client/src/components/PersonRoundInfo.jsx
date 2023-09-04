@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const PersonRoundInfo = ({ person, currentRound, changeBet, betAction, index }) => {
+export const PersonRoundInfo = ({ data, person, currentRound, changeBet, betAction, index }) => {
+  const getRankings = () => {
+    const copy = [...data.scores];
+    const sorted = copy.sort((a, b) => b.total - a.total);
+
+    const idxForPerson = sorted.findIndex((p) => p.name === person.name);
+
+    if (currentRound === 0) {
+      return "";
+    } else if (idxForPerson === sorted.length - 1) {
+      return "💩";
+    } else {
+      switch (idxForPerson) {
+        case 0:
+          return "🥇";
+        case 1:
+          return "🥈";
+        case 2:
+          return "🥉";
+        default:
+          return "";
+      }
+    }
+  };
+
   return (
     <div
       className={`card p-4 justify-center items-center gap-4 shadow-md md:text-base sm:text-sm ${
@@ -11,7 +35,9 @@ export const PersonRoundInfo = ({ person, currentRound, changeBet, betAction, in
           : "shadow-slate-700"
       }`}
     >
-      <p className="md:card-title">{person.name}</p>
+      <p className="md:card-title">
+        {person.name} {getRankings()}
+      </p>
       <div className="flex justify-between gap-4">
         <button
           className="btn-sm btn-circle bg-gray-400 text-black disabled:bg-gray-700"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const GameTable = ({ data, hideScorecard, currentRound }) => {
   const filteredRounds = data.gameRounds.slice(0, currentRound + 1);
@@ -16,25 +16,26 @@ export const GameTable = ({ data, hideScorecard, currentRound }) => {
             </tr>
           </thead>
           <tbody>
+            <tr className="text-center bg-slate-100 text-black font-bold">
+              <td>Total</td>
+              {data.scores.map((person) => (
+                <td key={person.name}>{person.total}</td>
+              ))}
+            </tr>
             {data.scores &&
               filteredRounds.map((round, roundIndex) => (
-                <tr key={roundIndex}>
-                  <td>{round}</td>
-                  {data.scores.map((person, index) => (
-                    <>
-                      <td>
-                        <span
-                          className={`${
-                            data.scores[index].rounds[roundIndex].madeBet === false ? "line-through opacity-40" : ""
-                          } `}
-                        >
-                          {data.scores[index].rounds[roundIndex].bet}
-                        </span>{" "}
-                        | {data.scores[index].rounds[roundIndex].score}
-                      </td>
-                    </>
-                  ))}
-                </tr>
+                <>
+                  <tr key={roundIndex}>
+                    <td>{round}</td>
+                    {data.scores.map((person, index) => (
+                      <>
+                        <td key={person.name} className="text-center">
+                          {data.scores[index].rounds[roundIndex].score}
+                        </td>
+                      </>
+                    ))}
+                  </tr>
+                </>
               ))}
           </tbody>
         </table>

@@ -24,12 +24,14 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
       round.madeBet = true;
       previousRound ? (round.score += previousRound.score) : +0;
       copy[index].rounds[currentRound] = round;
+      copy[index].total = round.score;
       setData({ ...data, scores: copy });
     } else {
       round.score = 0;
       previousRound ? (round.score += previousRound.score) : +0;
       round.madeBet = false;
       copy[index].rounds[currentRound] = round;
+      copy[index].total = round.score;
       setData({ ...data, scores: copy });
     }
   };
@@ -40,6 +42,8 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
       <div className="flex justify-center flex-wrap gap-4 my-4">
         {scores.map((person, index) => (
           <PersonRoundInfo
+            key={index}
+            data={data}
             person={person}
             currentRound={currentRound}
             changeBet={changeBet}
@@ -56,7 +60,6 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
         >
           Prev Round
         </button>
-        {/* TODO: Fix the calculation for game rounds */}
         <button
           className="btn btn-sm btn-neutral my-4"
           disabled={currentRound + 1 === data.rounds * 2 - 1}
