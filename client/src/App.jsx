@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { GameTable } from "./components/GameTable";
 import { GameStart } from "./components/GameStart";
 import { RoundInfo } from "./components/RoundInfo";
+import { GameButton } from "./components/GameButton";
+import "./App.css";
 
 function App() {
   const [newGame, setNewGame] = useState(false);
@@ -11,13 +12,6 @@ function App() {
   const [gameRounds, setGameRounds] = useState([]);
   const [currentRound, setCurrentRound] = useState(0);
   const [hideScorecard, setHideScorecard] = useState(true);
-
-  const onNewGame = () => {
-    localStorage.removeItem("data");
-    setData({});
-    setOpenGame(false);
-    setNewGame(!newGame);
-  };
 
   useEffect(() => {
     const foundData = JSON.parse(localStorage.getItem("data"));
@@ -76,9 +70,7 @@ function App() {
         <h1>Up the River / Down the River</h1>
       </header>
       <main className="p-4 flex flex-col items-center">
-        <button className="btn mt-8 w-[300px]" onClick={onNewGame}>
-          Start a new game
-        </button>
+        <GameButton data={data} setData={setData} setOpenGame={setOpenGame} setNewGame={setNewGame} newGame={newGame} />
         {newGame && (
           <GameStart
             createGameInfo={createGameInfo}

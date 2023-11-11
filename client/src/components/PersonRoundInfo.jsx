@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 export const PersonRoundInfo = ({ data, person, currentRound, changeBet, betAction, index }) => {
+  const [bet, setBet] = useState(person.rounds[currentRound].bet);
+
   const getRankings = () => {
     const copy = [...data.scores];
     const sorted = copy.sort((a, b) => b.total - a.total);
@@ -57,15 +59,19 @@ export const PersonRoundInfo = ({ data, person, currentRound, changeBet, betActi
       </div>
       <div className="flex flex-col gap-2">
         <button
-          disabled={person.rounds[currentRound].madeBet === true}
-          className="btn-sm btn btn-primary"
+          disabled={person.rounds[currentRound].madeBet}
+          className={`btn-sm btn btn-primary ${
+            person.rounds[currentRound].madeBet === false ? "opacity-10 hover:opacity-100" : ""
+          }`}
           onClick={() => betAction("made", index)}
         >
           Made bet
         </button>
         <button
           disabled={person.rounds[currentRound].madeBet === false}
-          className="btn-sm btn btn-error"
+          className={`btn-sm btn btn-error ${
+            person.rounds[currentRound].madeBet === true ? "opacity-10 hover:opacity-100" : ""
+          }`}
           onClick={() => betAction("not made", index)}
         >
           Did not make bet

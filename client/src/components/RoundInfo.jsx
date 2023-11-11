@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PersonRoundInfo } from "./PersonRoundInfo";
 
 export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data }) => {
+  const [tricksCalled, setTricksCalled] = useState(0);
+  const [totalTricksAvailable, setTotalTricksAvailable] = useState(0);
+
+  useEffect(() => {
+    setTricksCalled(
+      data.scores.reduce((accumulator, currentValue) => accumulator + currentValue.rounds[currentRound].bet, 0)
+    );
+
+    setTotalTricksAvailable(data.gameRounds[Number(currentRound)]);
+  }, [data, currentRound]);
+
   const changeBet = (index, type) => {
     if (type == "decrease") {
       let copy = [...data.scores];
@@ -38,7 +49,18 @@ export const RoundInfo = ({ scores, currentRound, setCurrentRound, setData, data
 
   return (
     <div className="flex flex-col mt-4 items-center">
-      <h1 className="md:text-3xl sm:text-xl text-center">Round #{data.gameRounds[Number(currentRound)]}</h1>
+      <div className="stats">
+        <div className="stat">
+          <div className="stat-title">Tricks Available</div>
+          <div className="stat-value">{data.gameRounds[Number(currentRound)]}</div>
+        </div>
+        <div className={`stat ${tricksCalled > totalTricksAvailable ? "text-red-400" : ""}`}>
+          <div className="stat-title">Tricks Called</div>
+          <div className="stat-value">
+            {tricksCalled} / {totalTricksAvailable}
+          </div>
+        </div>
+      </div>
       <div className="flex justify-center flex-wrap gap-4 my-4">
         {scores.map((person, index) => (
           <PersonRoundInfo
